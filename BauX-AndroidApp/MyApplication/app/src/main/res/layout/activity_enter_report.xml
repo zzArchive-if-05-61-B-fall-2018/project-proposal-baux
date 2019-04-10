@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grdnt"
+    tools:context=".EnterReportActivity">
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/enter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-30dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingLeft="250dp"
+        android:paddingRight="30dp">
+
+        <Button
+            android:id="@+id/ent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"
+            android:background="#60B1F3"
+            android:gravity="center"
+            android:letterSpacing="0.2"
+            android:padding="16dp"
+            android:text="Enter"
+            android:textColor="#d9e5f3"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo" />
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="220dp"
+        android:paddingBottom="125dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edittxt"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/roundview"
+            android:fadeScrollbars="false"
+            android:fadingEdge="vertical"
+            android:foregroundGravity="fill_vertical"
+            android:isScrollContainer="false"
+            android:requiresFadingEdge="vertical"
+            android:singleLine="false"
+            android:visibility="visible" />
+
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="150dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/report" />
+
+                <EditText
+                    android:id="@+id/report"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:letterSpacing="0.1"
+                    android:text="Work Report"
+                    android:textColor="#fff"
+                    android:textSize="25dp" />
+            </LinearLayout>
+        </LinearLayout>>
+    </LinearLayout>
+
+</RelativeLayout>
