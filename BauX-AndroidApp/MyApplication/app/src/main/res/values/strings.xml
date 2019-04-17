@@ -16,4 +16,5 @@
     <string name="title_activity_enter_hours">EnterHours</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_enter_report">EnterReportActivity</string>
+    <string name="title_activity_exit">ExitActivity</string>
 </resources>

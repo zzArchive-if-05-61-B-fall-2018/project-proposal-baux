@@ -187,7 +187,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/enter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="-30dp"
@@ -197,7 +196,7 @@
         android:paddingRight="30dp">
 
         <Button
-            android:id="@+id/ent"
+            android:id="@+id/enterHours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
