@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<!-- URL ZUM AUFRUFEN http://localhost:8484/baux-1.0-SNAPSHOT/ -->
+
+<h:head>
+    <title>BauX</title>
+    <link rel="icon" type="image/x-icon" href="logo.png"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <b:dataTable value="#{loginController.worker}"
+                     var="worker">
+            <b:dataTableColumn value="#{worker.id}" />
+            <b:dataTableColumn value="#{worker.name}" />
+            <b:dataTableColumn value ="#{worker.workedHours}" />
+        </b:dataTable>
+    </h:form>
+</h:body>
+</html>
