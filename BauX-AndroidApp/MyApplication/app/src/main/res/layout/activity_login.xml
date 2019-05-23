@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/grdnt"
-    tools:context=".LoginActivity">
+    tools:context=".activitys.LoginActivity">
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -39,6 +39,7 @@
                     android:src="@drawable/usrusr" />
 
                 <AutoCompleteTextView
+                    android:textCursorDrawable="@drawable/maincolor"
                     android:id="@+id/usrusr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,7 +70,8 @@
                     android:layout_gravity="center"
                     android:src="@drawable/pswd" />
 
-                <EditText
+                <AutoCompleteTextView
+                    android:textCursorDrawable="@drawable/maincolor"
                     android:id="@+id/pswrdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,12 +108,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="50dp"
-            android:background="#5DBCD2"
+            android:background="#60B1F3"
             android:gravity="center"
             android:letterSpacing="0.2"
             android:padding="16dp"
-            android:text="Login"
-            android:textColor="#d9e5f3"
+            android:text="LOGIN"
+            android:textColor="#FFFFFF"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activitys.LoginActivity"
             android:label="BauX"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,12 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EnterHoursActivity"
+            android:name=".activitys.EnterHoursActivity"
             android:label="BauX"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".EnterReportActivity"
+            android:name=".activitys.EnterReportActivity"
             android:label="BauX"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
