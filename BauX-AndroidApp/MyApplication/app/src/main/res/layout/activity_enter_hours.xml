@@ -196,9 +196,9 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="-30dp"
         android:gravity="bottom"
-        android:orientation="vertical"
-        android:paddingLeft="250dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="220dp"
+        android:paddingRight="30dp"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/enterHoursButton"
@@ -239,7 +239,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:paddingLeft="320dp"
+        android:paddingLeft="310dp"
         android:paddingTop="170dp"
         android:paddingRight="30dp">
 

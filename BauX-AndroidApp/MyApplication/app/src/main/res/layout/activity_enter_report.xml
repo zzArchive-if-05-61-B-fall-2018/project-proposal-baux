@@ -20,11 +20,11 @@
         android:layout_marginBottom="-30dp"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:paddingLeft="250dp"
+        android:paddingLeft="220dp"
         android:paddingRight="30dp">
 
         <Button
-            android:id="@+id/enterReport"
+            android:id="@+id/finishButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -57,21 +57,26 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:paddingTop="220dp">
-            <AutoCompleteTextView
-                android:id="@+id/report"
-                android:textCursorDrawable="@drawable/maincolor"
-                android:textColor="#fff"
-                android:textSize="16dp"
+            <ScrollView
+                android:id="@+id/enterReportScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:padding="8dp"
+                android:gravity="top"
                 android:background="@drawable/roundview"
-                android:fadeScrollbars="false"
-                android:fadingEdge="vertical"
-                android:foregroundGravity="fill_vertical"
-                android:isScrollContainer="false"
-                android:requiresFadingEdge="vertical"
-                android:singleLine="false"
-                android:visibility="visible" />
+                android:fillViewport="true">
+                <EditText
+                    android:id="@+id/report"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:foregroundGravity="fill_vertical"
+                    android:gravity="start"
+                    android:textColor="#fff"
+                    android:background="@null"
+                    android:textCursorDrawable="@drawable/maincolor"
+                    android:textSize="16dp" />
+            </ScrollView>
         </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

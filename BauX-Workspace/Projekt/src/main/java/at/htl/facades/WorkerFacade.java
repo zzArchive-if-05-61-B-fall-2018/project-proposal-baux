@@ -22,7 +22,21 @@ public class WorkerFacade {
         entityManager.persist(w);
         //---------------------------
 
-        TypedQuery<Worker> query = entityManager.createNamedQuery("nn", Worker.class);
+        TypedQuery<Worker> query = entityManager.createNamedQuery("worker.getall", Worker.class);
         return query.getResultList();
+    }
+
+    public Worker loginForeman(String username, String password) {
+       TypedQuery<Worker> query = entityManager.createNamedQuery("worker.login", Worker.class);
+       query.setParameter("name", username);
+       query.setParameter("password", password);
+
+        try {
+            return query.getSingleResult();
+        }
+        catch (Exception e) {
+            System.out.println("not found");
+        }
+        return null;
     }
 }

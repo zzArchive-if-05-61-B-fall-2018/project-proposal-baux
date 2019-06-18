@@ -19,20 +19,19 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.example.armin.myapplication.R;
+import co.example.armin.myapplication.server.HttpConnection;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,6 +39,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private static final int REQUEST_READ_CONTACTS = 0;
     private static final int REQUEST_SIGNUP = 2;
+    HttpConnection http;
+    private static LoginActivity instance;
 
 
     private static final String[] DUMMY_CREDENTIALS = new String[]{
@@ -54,6 +55,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    public static LoginActivity getInstance() {
+        if (instance == null) {
+            instance = new LoginActivity();
+        }
+        return instance;
+    }
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +71,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mUserView = (AutoCompleteTextView) findViewById(R.id.usrusr);
         populateAutoComplete();
 
-
         mPasswordView = (EditText) findViewById(R.id.pswrdd);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
+
         Button mLoginButoon = (Button) findViewById(R.id.lin);
         mLoginButoon.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isUserValid(mUserView.getText().toString()) && isPasswordValid(mPasswordView.getText().toString())){
-                    Intent intent = new Intent(getApplicationContext(), EnterHoursActivity.class);
-                    startActivityForResult(intent, REQUEST_SIGNUP);
+
+                try {
+                    if(attemptLogin()){
+                        if (mUserView.getText().toString()=="penis") {
+
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), EnterHoursActivity.class);
+                            startActivityForResult(intent, REQUEST_SIGNUP);
+                        }
+
+                    }
+                    else {
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -124,8 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Callback received when a permissions request has been completed.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
@@ -133,9 +143,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private void attemptLogin() {
+    private boolean attemptLogin() throws IOException {
         if (mAuthTask != null) {
-            return;
+            return false;
         }
 
         // Reset errors.
@@ -147,48 +157,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
-        View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
         if (TextUtils.isEmpty(user)) {
             mUserView.setError(getString(R.string.error_field_required));
-            focusView = mUserView;
-            cancel = true;
-        } else if (!isUserValid(user)) {
-            mUserView.setError(getString(R.string.error_invalid_user));
-            focusView = mUserView;
             cancel = true;
         }
+        if (cancel==false)
+           cancel = true;//isLoginValid(mUserView.getText().toString(), mPasswordView.getText().toString());
 
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(user, password);
-            mAuthTask.execute((Void) null);
-        }
+        return true;
+    }
+    /*
+    private void isLoginValid(String user, String password) throws IOException {
+
+        http = new HttpConnection();
+        Activity activity = LoginActivity.getInstance();
+        new HttpRequest(http, activity).execute("GET","http://10.0.2.2:8484/baux/rs/worker/login?username=firstName  lastName&password=password1");
     }
 
-    private boolean isUserValid(String user) {
-        //TODO: Replace this with your own logic
-        return user.contains("armin");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 1;
-    }
-
+    */
     /**
      * Shows the progress UI and hides the login form.
      */
