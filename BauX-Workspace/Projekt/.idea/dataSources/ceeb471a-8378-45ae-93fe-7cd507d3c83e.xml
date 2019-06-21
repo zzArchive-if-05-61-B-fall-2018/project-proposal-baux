@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="db@localhost">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.11">
+    <root id="1">
+      <ServerVersion>10.11</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="APP">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="NULLID"/>
+    <schema id="4" parent="1" name="SQLJ"/>
+    <schema id="5" parent="1" name="SYS"/>
+    <schema id="6" parent="1" name="SYSCAT"/>
+    <schema id="7" parent="1" name="SYSCS_DIAG"/>
+    <schema id="8" parent="1" name="SYSCS_UTIL"/>
+    <schema id="9" parent="1" name="SYSFUN"/>
+    <schema id="10" parent="1" name="SYSIBM"/>
+    <schema id="11" parent="1" name="SYSPROC"/>
+    <schema id="12" parent="1" name="SYSSTAT"/>
+    <table id="13" parent="2" name="SECRETARY"/>
+    <table id="14" parent="2" name="WORKER"/>
+    <table id="15" parent="2" name="WORKERGROUP"/>
+    <table id="16" parent="2" name="WORKER_WORKPERDAY"/>
+    <table id="17" parent="2" name="WORKPERDAY"/>
+    <column id="18" parent="13" name="SECRETARYID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="19" parent="13" name="PASSWORD">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="20" parent="13" name="USERNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <index id="21" parent="13" name="SQL190620210513670">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SECRETARYID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="22" parent="13" name="SQL190620210513670">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SECRETARYID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="23" parent="14" name="ID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="24" parent="14" name="NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="25" parent="14" name="GROUPID">
+      <Position>3</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="14" name="ISFOREMAN">
+      <Position>4</Position>
+      <DataType>BOOLEAN|16s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="14" name="PASSWORD">
+      <Position>5</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <index id="28" parent="14" name="SQL190620210513690">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="29" parent="14" name="SQL190620210513690">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="30" parent="15" name="GROUPID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="31" parent="15" name="GROUPNAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="32" parent="15" name="WORKER_ID">
+      <Position>3</Position>
+      <DataType>INTEGER|4s</DataType>
+    </column>
+    <index id="33" parent="15" name="SQL190620210513720">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>GROUPID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="34" parent="15" name="SQL190620210513870">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>WORKER_ID</ColNames>
+    </index>
+    <key id="35" parent="15" name="SQL190620210513720">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>GROUPID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="36" parent="15" name="FK93OKF42P0K5VIU4VVVAQSO3N6">
+      <ColNames>WORKER_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>WORKER</RefTableName>
+      <RefKeyName>SQL190620210513690</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="37" parent="16" name="WORKER_ID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="16" name="WORKERPERDAYLIST_ID">
+      <Position>2</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="39" parent="16" name="SQL190620210513760">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>WORKERPERDAYLIST_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="40" parent="16" name="SQL190620210513840">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>WORKER_ID</ColNames>
+    </index>
+    <index id="41" parent="16" name="SQL190620210513820">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>WORKERPERDAYLIST_ID</ColNames>
+    </index>
+    <key id="42" parent="16" name="SQL190620210513760">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>WORKERPERDAYLIST_ID</ColNames>
+    </key>
+    <foreign-key id="43" parent="16" name="FKCYRXI8K58BONP7BH5EQMHAH5R">
+      <ColNames>WORKER_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>WORKER</RefTableName>
+      <RefKeyName>SQL190620210513690</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="44" parent="16" name="FKQKAMDUXYTHA80AQJLX2SC5ERB">
+      <ColNames>WORKERPERDAYLIST_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>WORKPERDAY</RefTableName>
+      <RefKeyName>SQL190620210513740</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="45" parent="17" name="ID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="17" name="REPORTTEXT">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="47" parent="17" name="DATE">
+      <Position>3</Position>
+      <DataType>TIMESTAMP|93s</DataType>
+    </column>
+    <column id="48" parent="17" name="HOURS">
+      <Position>4</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="17" name="STAFFID">
+      <Position>5</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="50" parent="17" name="SQL190620210513740">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="51" parent="17" name="SQL190620210513740">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

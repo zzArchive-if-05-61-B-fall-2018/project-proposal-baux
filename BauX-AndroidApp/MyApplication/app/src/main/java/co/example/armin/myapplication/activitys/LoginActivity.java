@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import co.example.armin.myapplication.R;
 import co.example.armin.myapplication.server.HttpConnection;
+import co.example.armin.myapplication.server.HttpRequest;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -80,11 +82,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 try {
                     if(attemptLogin()){
-                        if (mUserView.getText().toString()=="penis") {
-
-                        } else {
+                        if (mUserView.getText().toString()=="Armin" && mPasswordView.getText().toString() == "armin") {
                             Intent intent = new Intent(getApplicationContext(), EnterHoursActivity.class);
                             startActivityForResult(intent, REQUEST_SIGNUP);
+                        } else {
+                            closeContextMenu();
                         }
 
                     }
@@ -164,19 +166,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
         if (cancel==false)
-           cancel = true;//isLoginValid(mUserView.getText().toString(), mPasswordView.getText().toString());
+           isLoginValid(mUserView.getText().toString(), mPasswordView.getText().toString());
 
         return true;
     }
-    /*
+
     private void isLoginValid(String user, String password) throws IOException {
 
         http = new HttpConnection();
         Activity activity = LoginActivity.getInstance();
-        new HttpRequest(http, activity).execute("GET","http://10.0.2.2:8484/baux/rs/worker/login?username=firstName  lastName&password=password1");
+        new HttpRequest(http, activity).execute("GET","http://10.0.2.2:8484/baux/rs/worker/login?username=Armin&password=armin");
     }
 
-    */
+
     /**
      * Shows the progress UI and hides the login form.
      */

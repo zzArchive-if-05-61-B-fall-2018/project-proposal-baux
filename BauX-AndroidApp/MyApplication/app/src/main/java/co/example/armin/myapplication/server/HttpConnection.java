@@ -1,6 +1,14 @@
 package co.example.armin.myapplication.server;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.URL;
 
-public class HttpConnection { /*
+public class HttpConnection {
 
     String Serverurl;
     String hostip;
@@ -116,5 +124,4 @@ public class HttpConnection { /*
         }
         return "";
     }
-    */
 }

@@ -19,8 +19,6 @@ public class Secretary {
 
     public Secretary(){ }
 
-    //region Getter & Setter
-
     public int getSecretaryId() {
         return secretaryId;
     }
@@ -44,7 +42,4 @@ public class Secretary {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-    //endregion
 }

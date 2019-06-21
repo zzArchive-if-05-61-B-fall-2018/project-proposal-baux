@@ -20,6 +20,7 @@ public class Worker {
     private boolean isForeman;
     private int groupId;
     private String password;
+    private int hours;
 
     @OneToMany
     private List<WorkPerDay> workerPerDayList;
@@ -79,5 +80,13 @@ public class Worker {
 
     public void setWorkerPerDayList(List<WorkPerDay> workerPerDayList) {
         this.workerPerDayList = workerPerDayList;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 }

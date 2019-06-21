@@ -1,12 +1,12 @@
 package co.example.armin.myapplication.server;
 
+import android.app.Activity;
 import android.os.AsyncTask;
+import android.widget.AutoCompleteTextView;
+
+import co.example.armin.myapplication.R;
 
 public class HttpRequest extends AsyncTask<String, Integer, String> {
-    @Override
-    protected String doInBackground(String... strings) {
-        return null;
-    } /*
 
     private HttpConnection http;
     private Activity activity;
@@ -50,7 +50,4 @@ public class HttpRequest extends AsyncTask<String, Integer, String> {
         }
         return result;
     }
-
-*/
-
 }

@@ -239,7 +239,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:paddingLeft="310dp"
+        android:paddingLeft="320dp"
         android:paddingTop="170dp"
         android:paddingRight="30dp">
 
@@ -256,7 +256,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/ehForeman"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="54dp"
                     android:background="@drawable/hourview"
                     android:ems="10"
                     android:inputType="phone"
@@ -273,7 +273,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/ehWorker1"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="54dp"
                     android:background="@drawable/hourview"
                     android:ems="10"
                     android:inputType="phone"
@@ -290,7 +290,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/ehWorker2"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="54dp"
                     android:background="@drawable/hourview"
                     android:ems="10"
                     android:inputType="phone"
@@ -308,7 +308,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/ehWorker3"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/hourview"
                     android:ems="10"
                     android:inputType="phone"
@@ -326,7 +326,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/ehWorker4"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/hourview"
                     android:ems="10"
                     android:inputType="phone"

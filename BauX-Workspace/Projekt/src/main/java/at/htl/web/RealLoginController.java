@@ -21,12 +21,8 @@ public class RealLoginController {
     @Inject
     private SecretaryFacade secretaryFacade;
 
-    @Size(min=4, max=20)
-    @NotEmpty
     private String username;
 
-    @Size(min=4, max=20)
-    @NotEmpty
     private String password;
 
 
@@ -56,21 +52,14 @@ public class RealLoginController {
     public void login() {
 
         if (secretaryFacade.validUser(username, password)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Congratulations! You've successfully logged in.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Eingeloggt");
             FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
 
-            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "index.xhtml");
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "workspace.xhtml");
 
         } else {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "That's the wrong password. Hint: BootsFaces rocks!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Username oder Passwort ist falsch");
             FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
         }
-    }
-
-    public void forgotPassword() {
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default user name: BootsFaces");
-        FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
-        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default password: rocks!");
-        FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
     }
 }

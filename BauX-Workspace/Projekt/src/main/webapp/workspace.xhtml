@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<!-- URL ZUM AUFRUFEN http://localhost:8484/baux -->
+
+<h:head>
+    <title>BauX-Workspace</title>
+    <link rel="icon" type="image/x-icon" href="logo.png"/>
+    <style type="text/css">
+    </style>
+</h:head>
+
+<h:body style="margin: 10px">
+    <b:navBar
+            inverse="true" fixed="top" fluid="true">
+        <b:navbarLinks pull="right">
+            <b:navLink value="Abmelden" href="login.xhtml" style="font-size:25px"/>
+        </b:navbarLinks>
+        <b:navbarLinks pull="left">
+            <b:navLink value="BauX-Workspace" iconAwesome="logo.png" href="workspace.xhtml" style="font-size:25px"/>
+        </b:navbarLinks>
+    </b:navBar>
+    <style type="text/css">
+    </style>
+    <h:form style="margin: 25px">
+        <p align="center">
+            <br></br>
+            <br>
+            </br>
+            <img src="logo.png" alt="img" height="120" width="120"></img>
+            <br></br>
+            <br></br>
+        </p>
+        <hr style="border-top: 2px solid #000000 !important"/>
+        <br></br>
+        <b:row>
+            <h2>Arbeitsbericht: </h2>
+            <br></br>
+            <b:datepicker id="cdate2" mode="toggle-icon" showWeek="true" placeholder="Datum"
+                      firstDay="1" value="#{indexController.filterDate}" required="true" col-sm="4"/>
+            <b:commandButton value="Herunterladen" update="@form" col-sm="2"
+                             look="success"/>
+        </b:row>
+        <br></br>
+        <hr style="border-top: 2px solid #000000 !important"/>
+        <br></br>
+        <b:row>
+            <h2>Gearbeitete Stunden der Arbeiter von - bis: </h2>
+            <br></br>
+            <b:datepicker id="cdate3" mode="toggle-icon" showWeek="true" placeholder="Von-Datum"
+                          firstDay="1" value="#{indexController.filterDate}" required="true" col-sm="4"/>
+            <b:datepicker id="cdate4" mode="toggle-icon" showWeek="true" placeholder="Bis-Datum"
+                          firstDay="1" value="#{indexController.filterDate}" required="true" col-sm="4"/>
+            <b:commandButton value="Auswählen" update="@form" col-sm="2"
+                             look="success"/>
+            <b:message for="cdate3" col-sm="6"/>
+        </b:row>
+        <b:row style="width: 100%;">
+                <br></br>
+                    <b:dataTable value="#{indexController.worker}"
+                                 var="worker"
+                                 responsive="true" col-sm="12" style="width; 100%;">
+                        <b:dataTableColumn value="#{worker.id}" label="Arbeiter ID"/>
+                        <b:dataTableColumn value="#{worker.groupId}" label="Partie ID"/>
+                        <b:dataTableColumn label="Rang">
+                            <h:outputText value="Vorarbeiter" rendered="#{worker.foreman}"/>
+                            <h:outputText value="Arbeiter" rendered="#{not worker.foreman}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn value="#{worker.name}" label="Arbeitername"/>
+                        <b:dataTableColumn value="#{worker.hours}" label="Gearbeitete Stunden"/>
+                    </b:dataTable>
+        </b:row>
+        <br></br>
+        <hr style="border-top: 2px solid #000000 !important"/>
+        <br></br>
+        <b:row style="width: 100%;">
+            <h:form style="width: 100%">
+                <h2>Partien: </h2>
+                <br></br>
+                    <b:dataTable value="#{indexController.workerGroups}"
+                                 var="workerGroup"
+                                 responsive="true" col-sm="12" style="width; 100%;">
+                        <b:dataTableColumn value="#{workerGroup.groupID}" label="Partie ID"/>
+                        <b:dataTableColumn value="#{workerGroup.groupName}" label="Partie-Name"/>
+                        <b:dataTableColumn value="#{workerGroup.worker.name}" label="Vorarbeiter"/>
+                    </b:dataTable>
+            </h:form>
+        </b:row>
+    </h:form>
+    <br></br>
+    <br></br>
+    <style type="text/css">
+        body
+        {
+            background-color: rgba(93, 188, 210, 0.69);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</h:body>
+</html>

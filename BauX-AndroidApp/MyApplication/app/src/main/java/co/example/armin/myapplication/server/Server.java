@@ -1,6 +1,23 @@
 package co.example.armin.myapplication.server;
 
-public class Server { /*
+import android.app.Activity;
+
+import java.lang.reflect.Field;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.ExecutionException;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import co.example.armin.myapplication.activitys.LoginActivity;
+
+public class Server {
 
     private static Server instance;
     String hostip;
@@ -58,44 +75,8 @@ public class Server { /*
        http = new HttpConnection();
     }
 
-    /*
-    public User login(String email, String password, Activity caller){
-
-        User result = null;
-
-        String hashpw = hashPassword(password);
-
-        HttpRequest request = new HttpRequest(http, caller);
-        request.execute("GET", "/users?email="+email+"&password="+password);
-        String jsonString = "";
-        try {
-            jsonString = request.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(jsonString.equals("")){
-            return null;
-        }
-
-        JSONArray jsonArray = null;
-        User user = null;
-        try {
-            jsonArray = new JSONArray(jsonString);
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-            user = new User(jsonObject.getString("name"),
-                    jsonObject.getString("email"),
-                    jsonObject.getString("password"),
-                    jsonObject.getInt("userid"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
     public String deleteRequest(String header){
-        HttpRequest request = new HttpRequest(http, MainActivity.getInstance());
+        HttpRequest request = new HttpRequest(http, LoginActivity.getInstance());
         request.execute("DELETE", header);
 
         String result = "";
@@ -111,7 +92,7 @@ public class Server { /*
     }
 
     public String postRequest(String header, String body){
-        HttpRequest request = new HttpRequest(http, MainActivity.getInstance());
+        HttpRequest request = new HttpRequest(http, LoginActivity.getInstance());
         request.execute("POST", header, body);
 
         String result = "";
@@ -127,7 +108,7 @@ public class Server { /*
     }
 
     public String getRequest(String header){
-        HttpRequest request = new HttpRequest(http, MainActivity.getInstance());
+        HttpRequest request = new HttpRequest(http, LoginActivity.getInstance());
         request.execute("GET", header);
 
         String result = "";
@@ -142,9 +123,9 @@ public class Server { /*
         return result;
     }
 
-    public boolean userExists(String email, Activity caller){
+    public boolean userExists(String worker, Activity caller){
         HttpRequest request = new HttpRequest(http, caller);
-        request.execute("GET", "/users?email="+email);
+        request.execute("GET", "/users?worker="+worker);
         String result = "";
         try {
             result = request.get();
@@ -157,27 +138,6 @@ public class Server { /*
         return !result.equals("");
     }
 
-    public boolean register(String email, String password, String name, Activity caller){
-
-        if(userExists(email,caller)){
-            return false;
-        }
-        HttpRequest request = new HttpRequest(http, caller);
-        request.execute("POST", "/users", String.format("{\"name\":\"%s\",\"email\":\"%s\",\"password\":\"%s\"}", name, email, password));
-        String jsonString = "";
-        try {
-            jsonString = request.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(jsonString.equals("")){
-            return false;
-        }
-        return true;
-    }
-
     private String hashPassword(String pw){
         MessageDigest messageDigest = null;
         try {
@@ -188,86 +148,6 @@ public class Server { /*
         messageDigest.update(pw.getBytes());
         String passwordHash = new String(messageDigest.digest());
         return passwordHash;
-    }
-
-    public List<User> getUsersOfGroup(int groupid, Activity caller){
-        HttpRequest request = new HttpRequest(http, caller);
-        request.execute("GET", String.format("/group?groupid=%d",groupid));
-        List<User> users = new ArrayList<>();
-        try {
-            String jstring = request.get();
-            JSONArray array = new JSONArray(jstring);
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject jsonObject = array.getJSONObject(i);
-                users.add(new User(jsonObject.getString("name"),jsonObject.getString("email"),"",jsonObject.getInt("userid")));
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
-
-    public GroupList getGrouplist(GroupList groupList, Activity caller){
-        HttpRequest request = new HttpRequest(http, caller);
-        request.execute("GET", "/grouplist?userid="+MainActivity.getInstance().getCurrentUser().getId());
-        try {
-            JSONArray array = new JSONArray(request.get());
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject jsonObject = array.getJSONObject(i);
-                if(groupList.findGroupById(jsonObject.getInt("groupid")) == null){
-                    groupList.addGroup(new Group(jsonObject.getString("name"), MainActivity.getInstance().getCurrentUser(), jsonObject.getInt("groupid")));
-                }
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return groupList;
-    }
-
-    public void getGroupChanges(Group group, Activity caller){
-        HttpRequest request = new HttpRequest(http, caller);
-        request.execute("GET", String.format("/changeset?groupid=%d&changeid=%d",group.getId(),group.getChangeset()));
-
-        try {
-            String tmp = request.get();
-            JSONArray array = new JSONArray(tmp);
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject row = array.getJSONObject(i);
-                String action = row.getString("action");
-                JSONObject data = new JSONObject(row.getString("data").replaceAll("\\\\",""));
-                if(action.equals("ADDITEM")){
-                    Item item = new Item(data.getString("itemname"));
-                    MainActivity.getInstance().getItems().addItem(item);
-                    group.findListByName(data.getString("listname")).addItem(new ItemContainer(item, data.getInt("count"), data.getString("unit")),false);
-                }
-                else if(action.equals("DELITEM")){
-                    group.findListByName(data.getString("listname")).removeItem(data.getString("itemname"), data.getString("unit"));
-                }
-                else if(action.equals("TICKITEM")){
-                    group.findListByName(data.getString("listname")).itemChangeTick(group.findListByName(data.getString("listname")).findItemByNameAndUnit(data.getString("itemname"), data.getString("unit")), data.getBoolean("isticked"));
-                }
-                else if(action.equals("ADDSHOPPINGLIST")){
-                    group.addList(data.getString("listname"));
-                }
-                else if(action.equals("DELSHOPPINGLIST")){
-                    group.removeShoppinglist(data.getString("listname"));
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public boolean isConnected(Activity caller){
@@ -283,5 +163,4 @@ public class Server { /*
         }
         return result;
     }
-    */
 }

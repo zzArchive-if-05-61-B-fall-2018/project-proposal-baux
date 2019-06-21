@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-<!-- URL ZUM AUFRUFEN http://localhost:8484/baux-1.0-SNAPSHOT/ -->
+<!-- URL ZUM AUFRUFEN http://localhost:8484/baux/login.xhtml -->
 
 <h:head>
     <title>BauX-Login</title>
@@ -18,26 +18,33 @@
 
 <h:body>
     <style type="text/css">
-        body{
+        body
+        {
             background-image:url("background.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
     </style>
     <p align = "center">
         <br></br>
+        <br></br>
         <img src="logo.png" alt="img" height="142" width="142"></img>
+        <br></br>
+        <br></br>
+        <br></br>
 
     </p>
     <br></br>
     <h:form id="loginForm">
         <b:container layout="fluid">
-            <b:panel title="BauX-Login" look="primary">
+            <b:panel title="BauX-Login" look="primary" collapsible="false">
                 <b:row>
                     <b:column medium-screen="2">
-                        <h:outputText value="Username:" for="username" />
+                        <h:outputText value="Benutzername:" for="username" />
                     </b:column>
                     <b:column medium-screen="4">
-                        <b:inputText placeholder="Username" id="username" value="#{realLoginController.username}"
+                        <b:inputText placeholder="Benutzername" id="username" value="#{realLoginController.username}"
                                      ajax="true" autocomplete="false" update="@(.message)">
                             <f:facet name="prepend">
                                 <b:icon name="user" />
@@ -48,12 +55,12 @@
                         <b:message for="username" />
                     </b:column>
                 </b:row>
-                <b:row> <!--tooltip="Insert Password here.">-->
+                <b:row>
                     <b:column medium-screen="2">
-                        <h:outputText value="Password:" />
+                        <h:outputText value="Passwort:" />
                     </b:column>
                     <b:column medium-screen="4">
-                        <b:inputSecret placeholder="Password" id="password" value="#{realLoginController.password}"
+                        <b:inputSecret placeholder="Passwort" id="password" value="#{realLoginController.password}"
                                        ajax="true" autocomplete="false" update="@(.message)">
                             <f:facet name="prepend">
                                 <b:iconAwesome name="key" />
@@ -66,7 +73,7 @@
                 </b:row>
                 <b:row>
                     <b:column span="2" offset="2">
-                        <b:commandButton value="login" actionListener="#{realLoginController.login}" update="@form" look="primary"
+                        <b:commandButton value="Anmelden" actionListener="#{realLoginController.login}" update="@form" look="primary"
                                          style="width:100%" />
                     </b:column>
                     <b:column span="2">

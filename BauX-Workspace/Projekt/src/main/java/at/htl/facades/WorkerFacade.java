@@ -17,9 +17,9 @@ public class WorkerFacade {
     public List<Worker> GetAllWorker() {
 
         //Erstellen eines Workers
-        Worker w = new Worker();
-        w.setName("firstName", " lastName");
-        entityManager.persist(w);
+        //Worker w = new Worker();
+        //w.setName("Max", " Mustermann");
+        //entityManager.persist(w);
         //---------------------------
 
         TypedQuery<Worker> query = entityManager.createNamedQuery("worker.getall", Worker.class);
